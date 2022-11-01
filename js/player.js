@@ -1,12 +1,13 @@
 class Player {
 
-    constructor() {
+    constructor(row, col, points) {
         this.dexterStart;
         this.dexterPush;
         this.dexterPushStop;
         this.image;
         this.row = SQUARE_SIDE;
         this.col = SQUARE_SIDE;
+        this.points = points;
     }
 
     preload() {
@@ -25,7 +26,7 @@ class Player {
           this.col  -= SQUARE_SIDE;
           this.image = this.dexterStart;
         }
-      }
+    }
     
     moveDown() {
         if (this.col < HEIGHT - (SQUARE_SIDE * 2)) {
@@ -59,4 +60,15 @@ class Player {
             this.moveDown();
         }
     }
+
+    collision() {
+        console.log(this.points);
+        this.points.positionChips = this.points.positionChips.filter(chip => {
+            if (dist(this.row, this.col, chip.x, chip.y) < (SQUARE_SIDE * 2)) {
+                //console.log("here");
+                return false;
+            } else return true;
+        })
+    }
+
 }

@@ -30,7 +30,7 @@ class Background {
             }
         }
         for (let i = SQUARE_SIDE; i <= (SQUARE_SIDE * 3); i += SQUARE_SIDE) {
-            image(this.imageSpriteRose, i, 800, SQUARE_SIDE, SQUARE_SIDE);
+            image(this.imageSpriteRose, i, 900, SQUARE_SIDE, SQUARE_SIDE);
         }
     }
 }

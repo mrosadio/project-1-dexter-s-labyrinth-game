@@ -1,35 +1,87 @@
-class Points {
+class Chips {
 
-    constructor() {
-        this.byte;
-        this.chip;
-        this.diskette;
-        this.power;
+    constructor(x, y) {
+        this.chip
+        this.x      = x;
+        this.y      = y;
     }
 
     preload() {
-        this.byte       = loadImage("../img/points/byte-front.png");
-        this.chip       = loadImage("../img/points/chip.png");
-        this.diskette   = loadImage("../img/points/diskette.png");
-        this.power      = loadImage("../img/points/power.png");
+        // this.chip   = loadImage("../img/points/chip.png");
     }
 
     draw() {
-        // Draw chips
-        image(this.chip, SQUARE_SIDE * 4, SQUARE_SIDE * 8, SQUARE_SIDE, SQUARE_SIDE);
-        image(this.chip, SQUARE_SIDE * 9, SQUARE_SIDE * 8, SQUARE_SIDE, SQUARE_SIDE);
-        image(this.chip, SQUARE_SIDE * 9, SQUARE_SIDE * 3, SQUARE_SIDE, SQUARE_SIDE);
-        image(this.chip, SQUARE_SIDE * 13, SQUARE_SIDE * 9, SQUARE_SIDE, SQUARE_SIDE);
-        image(this.chip, SQUARE_SIDE * 16, SQUARE_SIDE * 7, SQUARE_SIDE, SQUARE_SIDE);
-        image(this.chip, SQUARE_SIDE * 18, SQUARE_SIDE, SQUARE_SIDE, SQUARE_SIDE);
+        image(this.chip, this.x, this.y, SQUARE_SIDE, SQUARE_SIDE);
+    }
 
-        // Draw bytes
-        for (let i = SQUARE_SIDE; i <= (SQUARE_SIDE * 3); i += SQUARE_SIDE) {
-            for (let j = 0; j <= SQUARE_SIDE; j += SQUARE_SIDE) {
-                image(this.byte, i, HEIGHT - (SQUARE_SIDE * 3) + j, SQUARE_SIDE, SQUARE_SIDE);
-           }
+}
+
+class Bytes {
+
+    constructor(byte, x, y) {
+        this.byte   = byte;
+        this.x      = x;
+        this.y      = y;
+        console.log(this.byte);
+    }
+
+    preload() {
+        // this.byte   = loadImage("../img/points/byte-front.png");
+    }
+
+    draw() {
+        console.log(this.byte)
+        console.log(this.x)
+        console.log(this.y)
+        image(this.byte, this.x, this.y, SQUARE_SIDE, SQUARE_SIDE);
+    }
+
+}
+
+
+
+class Points {
+
+    constructor() {
+        console.log("2")
+        this.chip;
+        this.byte;
+        this.positionChips  = [];
+        this.xChips         = [400, 900, 900, 1200, 1600, 1800];
+        this.yChips         = [800, 800, 300,  900,  700,  100];
+        this.positionBytes  = [];
+        this.xBytes         = [100, 200, 300, 100, 200, 300];
+        this.yBytes         = [1000, 1000, 1000, 1100, 1100, 1100];
+        this.createPositions();
+    }
+
+    createPositions() {
+        for (let i = 0; i < this.xChips.length; i++) {
+            this.positionChips.push(new Chips(this.xChips[i], this.yChips[i]));
         }
-        image(this.byte, SQUARE_SIDE * 16, SQUARE_SIDE * 3, SQUARE_SIDE, SQUARE_SIDE);
-        image(this.byte, SQUARE_SIDE * 12, SQUARE_SIDE * 4, SQUARE_SIDE, SQUARE_SIDE);
+        console.log(this.positionChips)
+        // for (let i = 0; i < this.xBytes.length; i++) {
+        //     this.positionBytes.push(new Bytes(this.byte, this.xBytes[i], this.yBytes[i]));
+        // }
+    }
+
+    preload() {
+        this.chip           = loadImage("../img/points/chip.png");
+        this.byte           = loadImage("../img/points/byte-front.png");
+    }
+
+    draw() {
+        /* for (let i = 0; i < this.xChips.length; i++) {
+            this.positionChips.push(new Chips(this.chip, this.xChips[i], this.yChips[i]));
+        } */
+        this.positionChips.forEach(function(chip) {
+            chip.draw();
+        })
+        /* for (let i = 0; i < this.xBytes.length; i++) {
+            this.positionBytes.push(new Bytes(this.byte, this.xBytes[i], this.yBytes[i]));
+        } */
+        this.positionBytes.forEach(function(byte) {
+            byte.draw();
+        })
     }
 }
