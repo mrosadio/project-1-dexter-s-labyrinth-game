@@ -6,10 +6,6 @@ class Chips {
         this.y      = y;
     }
 
-    preload() {
-        // this.chip   = loadImage("../img/points/chip.png");
-    }
-
     draw() {
         image(this.chip, this.x, this.y, SQUARE_SIDE, SQUARE_SIDE);
     }
@@ -18,32 +14,22 @@ class Chips {
 
 class Bytes {
 
-    constructor(byte, x, y) {
-        this.byte   = byte;
+    constructor(x, y) {
+        this.byte;
         this.x      = x;
         this.y      = y;
-        console.log(this.byte);
-    }
-
-    preload() {
-        // this.byte   = loadImage("../img/points/byte-front.png");
     }
 
     draw() {
-        console.log(this.byte)
-        console.log(this.x)
-        console.log(this.y)
         image(this.byte, this.x, this.y, SQUARE_SIDE, SQUARE_SIDE);
     }
 
 }
 
 
-
 class Points {
 
     constructor() {
-        console.log("2")
         this.chip;
         this.byte;
         this.positionChips  = [];
@@ -59,10 +45,9 @@ class Points {
         for (let i = 0; i < this.xChips.length; i++) {
             this.positionChips.push(new Chips(this.xChips[i], this.yChips[i]));
         }
-        console.log(this.positionChips)
-        // for (let i = 0; i < this.xBytes.length; i++) {
-        //     this.positionBytes.push(new Bytes(this.byte, this.xBytes[i], this.yBytes[i]));
-        // }
+        for (let i = 0; i < this.xBytes.length; i++) {
+            this.positionBytes.push(new Bytes(this.xBytes[i], this.yBytes[i]));
+        }
     }
 
     preload() {
@@ -71,15 +56,9 @@ class Points {
     }
 
     draw() {
-        /* for (let i = 0; i < this.xChips.length; i++) {
-            this.positionChips.push(new Chips(this.chip, this.xChips[i], this.yChips[i]));
-        } */
         this.positionChips.forEach(function(chip) {
             chip.draw();
         })
-        /* for (let i = 0; i < this.xBytes.length; i++) {
-            this.positionBytes.push(new Bytes(this.byte, this.xBytes[i], this.yBytes[i]));
-        } */
         this.positionBytes.forEach(function(byte) {
             byte.draw();
         })

@@ -5,9 +5,10 @@ class Player {
         this.dexterPush;
         this.dexterPushStop;
         this.image;
-        this.row = SQUARE_SIDE;
-        this.col = SQUARE_SIDE;
+        this.row    = SQUARE_SIDE;
+        this.col    = SQUARE_SIDE;
         this.points = points;
+        this.score  = 0;
     }
 
     preload() {
@@ -62,13 +63,21 @@ class Player {
     }
 
     collision() {
-        console.log(this.points);
         this.points.positionChips = this.points.positionChips.filter(chip => {
-            if (dist(this.row, this.col, chip.x, chip.y) < (SQUARE_SIDE * 2)) {
-                //console.log("here");
+            if (dist(this.row, this.col, chip.x, chip.y) < SQUARE_SIDE) {
+                this.score++
+                document.querySelector("#score span").innerText = this.score;
                 return false;
-            } else return true;
+            } else {
+                return true;
+            }
         })
     }
+
+    /*
+    collisionObstacle() {
+        if (dist(this.row, this.col, ))
+    }
+    */
 
 }
