@@ -4,34 +4,33 @@ class Player {
         this.dexterStart;
         this.dexterPush;
         this.dexterPushStop;
+        this.dexterPath;
         this.image;
         this.score              = 0;
         this.row                = SQUARE_SIDE;
         this.col                = SQUARE_SIDE;
         this.points             = points;
         this.obstacles          = obstacles;
-        this.path               = [];
+        this.usedPath           = [[this.row, this.col]];
     }
 
     preload() {
         this.dexterStart    = loadImage("../img/player/dexter-start-position.png");
         this.dexterPush     = loadImage("../img/player/dexter-push.png");
         this.dexterPushStop = loadImage("../img/player/dexter-push-stop.png");
-        this.image = this.dexterStart;
+        this.dexterPath     = loadImage("../img/player/dexter-path.png");
+        this.image          = this.dexterStart;
     }
 
     draw() {
         image(this.image, this.row, this.col, SQUARE_SIDE, SQUARE_SIDE);
-    }
-
-    drawPath() {
-        //let positionPlayer = 
-
-        /*
-        1. Create class to store coordinates in object
-        2. Push object to array
-        3. Color path to blue
-        */
+        /* Draw player path. Last item of array should draw Dexter */        
+        for (let coordinates of this.usedPath) {
+            image(this.dexterPath, coordinates[0], coordinates[1], SQUARE_SIDE, SQUARE_SIDE)
+            if (coordinates === this.usedPath[this.usedPath.length - 1]) {
+                image(this.image, coordinates[0], coordinates[1], SQUARE_SIDE, SQUARE_SIDE);
+            }
+        }  
     }
 
     moveUp() {
@@ -88,11 +87,23 @@ class Player {
         } if (keyCode === 40) {
             this.moveDown();
         }
+
+        this.usedPath.push([this.row, this.col]);
+        console.log(this.usedPath);
     }
 
     collision() {
+        /* Remove chips objects from coordinates array */
         this.points.positionChips = this.points.positionChips.filter(chip => {
             if (dist(this.row, this.col, chip.x, chip.y) < SQUARE_SIDE) {
+                this.score++
+                document.querySelector("#score span").innerText = this.score;
+                return false;
+            } else return true;
+        })
+        /* Remove bytes objects from coordinates array */
+        this.points.positionBytes = this.points.positionBytes.filter(byte => {
+            if (dist(this.row, this.col, byte.x, byte.y) < SQUARE_SIDE) {
                 this.score++
                 document.querySelector("#score span").innerText = this.score;
                 return false;

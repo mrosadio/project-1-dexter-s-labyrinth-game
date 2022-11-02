@@ -1,5 +1,5 @@
 /* ----------------------------------------------- */
-/* ------------ Call classes functions ----------- */
+/* ----------- Call classes & functions ---------- */
 /* ----------------------------------------------- */
 
 
@@ -33,7 +33,7 @@ function draw() {
     player.draw();
     points.draw();
     obstacles.draw();
-  }
+}
 
 function keyPressed() {
   player.keyPressed();

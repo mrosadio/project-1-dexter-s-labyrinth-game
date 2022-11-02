@@ -36,8 +36,8 @@ class Points {
         this.xChips         = [400, 900, 900, 1200, 1600, 1800];
         this.yChips         = [800, 800, 300,  900,  700,  100];
         this.positionBytes  = [];
-        this.xBytes         = [100, 200, 300, 100, 200, 300];
-        this.yBytes         = [1000, 1000, 1000, 1100, 1100, 1100];
+        this.xBytes         = [100, 200, 300, 100, 200, 300, 500];
+        this.yBytes         = [1000, 1000, 1000, 1100, 1100, 1100, 800];
         this.createPositions();
     }
 
