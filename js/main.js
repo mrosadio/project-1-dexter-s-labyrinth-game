@@ -25,6 +25,7 @@ function preload() {
   })
   obstacles.positionBolts.forEach((bolt) => {
     bolt.bolt   = loadImage("../img/obstacles/bolt.png");
+    bolt.sprite = loadImage("../img/field/map-sprite-rose.png");
   })
 }
 
