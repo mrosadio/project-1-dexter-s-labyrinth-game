@@ -1,14 +1,16 @@
 class Player {
 
-    constructor(row, col, points) {
+    constructor(row, col, points, obstacles) {
         this.dexterStart;
         this.dexterPush;
         this.dexterPushStop;
         this.image;
-        this.row    = SQUARE_SIDE;
-        this.col    = SQUARE_SIDE;
-        this.points = points;
-        this.score  = 0;
+        this.score              = 0;
+        this.row                = SQUARE_SIDE;
+        this.col                = SQUARE_SIDE;
+        this.points             = points;
+        this.obstacles          = obstacles;
+        this.path               = [];
     }
 
     preload() {
@@ -22,31 +24,57 @@ class Player {
         image(this.image, this.row, this.col, SQUARE_SIDE, SQUARE_SIDE);
     }
 
+    drawPath() {
+        //let positionPlayer = 
+
+        /*
+        1. Create class to store coordinates in object
+        2. Push object to array
+        3. Color path to blue
+        */
+    }
+
     moveUp() {
-        if (this.col > SQUARE_SIDE) {
-          this.col  -= SQUARE_SIDE;
-          this.image = this.dexterStart;
+        this.checkPossibleMoves();
+        if (this.moveUpPossible) {
+            if (this.col > SQUARE_SIDE) {
+                this.col  -= SQUARE_SIDE;
+                this.image = this.dexterStart;
+            }
+            this.checkPossibleMoves();
         }
     }
     
     moveDown() {
-        if (this.col < HEIGHT - (SQUARE_SIDE * 2)) {
-          this.col  += SQUARE_SIDE;
-          this.image = this.dexterStart;
+        this.checkPossibleMoves();
+        if (this.moveDownPossible) {
+            if (this.col < HEIGHT - (SQUARE_SIDE * 2)) {
+                this.col  += SQUARE_SIDE;
+                this.image = this.dexterStart;
+            }
+            this.checkPossibleMoves();
         }
     }
     
     moveLeft() {
-        if (this.row > SQUARE_SIDE) {
-          this.row  -= SQUARE_SIDE;
-          this.image = this.dexterStart;
+        this.checkPossibleMoves();
+        if (this.moveLeftPossible) {
+            if (this.row > SQUARE_SIDE) {
+                this.row  -= SQUARE_SIDE;
+                this.image = this.dexterStart;
+            }
+            this.checkPossibleMoves();
         }
     }
     
     moveRight() {
-        if (this.row < WIDTH - (SQUARE_SIDE * 2)) {
-          this.row  += SQUARE_SIDE;
-          this.image = this.dexterPush;
+        this.checkPossibleMoves();
+        if (this.moveRightPossible) {
+            if (this.row < WIDTH - (SQUARE_SIDE * 2)) {
+                this.row  += SQUARE_SIDE;
+                this.image = this.dexterPush;
+            }
+            this.checkPossibleMoves();
         }
     }
       
@@ -68,16 +96,35 @@ class Player {
                 this.score++
                 document.querySelector("#score span").innerText = this.score;
                 return false;
-            } else {
-                return true;
-            }
+            } else return true;
         })
     }
 
-    /*
-    collisionObstacle() {
-        if (dist(this.row, this.col, ))
+    checkPossibleMoves() {
+        this.moveUpPossible     = true;
+        this.moveDownPossible   = true;
+        this.moveLeftPossible   = true;
+        this.moveRightPossible  = true;
+        this.obstacles.positionBolts.forEach(position => {
+            if (position.x === this.row && position.y === this.col - SQUARE_SIDE) {
+                this.moveUpPossible = false;
+            }
+        });
+        this.obstacles.positionBolts.forEach(position => {
+            if (position.x === this.row && position.y === this.col + SQUARE_SIDE) {
+                this.moveDownPossible = false;
+            }
+        });
+        this.obstacles.positionBolts.forEach(position => {
+            if (position.x === this.row - SQUARE_SIDE && position.y === this.col) {
+                this.moveLeftPossible = false;
+            }
+        });
+        this.obstacles.positionBolts.forEach(position => {
+            if (position.x === this.row + SQUARE_SIDE && position.y === this.col) {
+                this.moveRightPossible = false;
+            }
+        });
     }
-    */
 
 }

@@ -2,14 +2,11 @@
 /* ------------ Call classes functions ----------- */
 /* ----------------------------------------------- */
 
-/*const game      = new Game();*/
-const points      = new Points();
-const player      = new Player(0, 0, points);
-const background  = new Background();
 
-//const bolts       = new Bolts();
+const points      = new Points();
 const obstacles   = new Obstacles();
-const exit        = new Exit();
+const player      = new Player(0, 0, points, obstacles);
+const background  = new Background();
 
 function setup() {
     let canvas = createCanvas(WIDTH, HEIGHT);
@@ -19,9 +16,7 @@ function preload() {
   background.preload();
   player.preload();
   points.preload();
-  //bolts.preload();
   obstacles.preload();
-  exit.preload();
   points.positionChips.forEach((chip) => {
     chip.chip   = loadImage("../img/points/chip.png");
   })
@@ -37,9 +32,7 @@ function draw() {
     background.drawMap();
     player.draw();
     points.draw();
-    //bolts.draw();
     obstacles.draw();
-    exit.draw();
   }
 
 function keyPressed() {
