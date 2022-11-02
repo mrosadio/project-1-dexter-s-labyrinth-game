@@ -36,7 +36,7 @@ class Obstacles {
         }
     }
 
-    preload() {
+   preload() {
         this.bolt   = loadImage("../img/obstacles/bolt.png");
         this.sprite = loadImage("../img/field/map-sprite-rose.png");
     }

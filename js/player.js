@@ -12,6 +12,7 @@ class Player {
         this.points             = points;
         this.obstacles          = obstacles;
         this.usedPath           = [[this.row, this.col]];
+        this.subObstacles       = [];
     }
 
     preload() {
@@ -87,9 +88,9 @@ class Player {
         } if (keyCode === 40) {
             this.moveDown();
         }
-
         this.usedPath.push([this.row, this.col]);
-        console.log(this.usedPath);
+        this.moveObstacles();
+
     }
 
     collision() {
@@ -137,5 +138,32 @@ class Player {
             }
         });
     }
+
+    moveObstacles() {
+        /* Nested loop */
+        for (let obstacle of this.obstacles.positionBolts) {
+            for (let position of this.usedPath) {
+                if (obstacle.x === position[0] && obstacle.y + SQUARE_SIDE === position[1]) {
+                    let xCollision = obstacle.x;
+                    let yCollision = obstacle.y;
+                    this.subObstacles = this.obstacles.positionBolts.filter(element => {
+                        if (element.x === xCollision && element.y <= yCollision) {
+                            return true;
+                        } else return false;
+                    })
+                }
+            }
+        }
+        console.log(this.subObstacles);
+        /*console.log(this.obstacles.positionBolts);*/
+
+        /* Iterate through each object of subarray and change the y-coordinates */
+        /*for (let element of this.subObstacles) {
+            element.y = element.y + SQUARE_SIDE;
+        }
+        console.log(this.subObstacles);*/
+    }
+
+    
 
 }
