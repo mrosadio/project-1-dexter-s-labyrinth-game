@@ -8,10 +8,22 @@ body {
 }
 
 h1 {
-    font-size: 90pt;
-    color: greenyellow;
+    font-size: 100pt;
+    margin: 0;
+}
+
+.main {
+    font-family: "Baby Kruffy";
+    color: #CFFF34;
+    margin: 0;
+}
+
+.subtitle {
+    margin: 0;
+    color: #00FF00;
 }
 
 h2 {
-    font-size: 70pt;
+    font-size: 50pt;
+    margin: 0;
 }
