@@ -3,11 +3,15 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-family: sans-serif;
+    font-family: 'Data 70', sans-serif;
     background-image: url("../img/field/microchip.jpg");
 }
 
 h1 {
-    font-size: 72pt;
+    font-size: 90pt;
     color: greenyellow;
+}
+
+h2 {
+    font-size: 70pt;
 }
