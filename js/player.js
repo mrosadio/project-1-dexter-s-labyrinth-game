@@ -154,7 +154,8 @@ class Player {
             }
         }
         // If collision point exists and player already went thorugh collision point 
-        if (xCollision && yCollision && this.row === xCollision + SQUARE_SIDE) {
+        if (xCollision && yCollision && this.row === xCollision + SQUARE_SIDE && this.col === yCollision) { 
+            // if player goes back to this position, statement gets executed!
             this.subObstacles = this.obstacles.positionBolts.filter(element => {
                 if (element.x === xCollision && element.y < yCollision) {
                     return true;
@@ -164,40 +165,11 @@ class Player {
             for (let element of this.subObstacles) {
                 element.y = element.y + SQUARE_SIDE;
             }
+            console.log(this.subObstacles);
+            console.log(this.usedPath);
             xCollision = null;
             yCollision = null;
         }
-        console.log(this.subObstacles);
-        console.log(this.usedPath);
-
-
-        /* Version 1 Code - DO NOT MODIFY */
-
-        /* If there is a collision coordinate, 
-           save the coordinates of obstacles above collision point */
-        /*if (xCollision && yCollision) { // If there is a collision coordinate, execute loop 
-            for (let obstacle of this.obstacles.positionBolts) {
-                for (let position of this.usedPath) {
-                    if (obstacle.x === position[0] && obstacle.y + SQUARE_SIDE === position[1]) {
-                        xCollision = obstacle.x;
-                        yCollision = obstacle.y + SQUARE_SIDE;
-                        console.log(xCollision, yCollision);
-                        this.subObstacles = this.obstacles.positionBolts.filter(element => {
-                            if (element.x === xCollision && element.y < yCollision) {
-                                return true;
-                            } else return false;
-                        })
-                    }
-                }
-
-                for (let element of this.subObstacles) {
-                    element.y = element.y + SQUARE_SIDE;
-                }
-                xCollision = null;
-                yCollision = null;
-            }
-        }
-        */
     }
 
 
