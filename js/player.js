@@ -139,13 +139,11 @@ class Player {
     }
 
     moveObstacles() {
-        /* Nested loop */
         let xCollision;
         let yCollision;
-        console.log(xCollision, yCollision);
-        /* Working version */
         for (let obstacle of this.obstacles.positionBolts) {
             for (let position of this.usedPath) {
+                
                 if (obstacle.x === position[0] && obstacle.y + SQUARE_SIDE === position[1]) {
                     xCollision = obstacle.x;
                     yCollision = obstacle.y + SQUARE_SIDE;
@@ -157,7 +155,8 @@ class Player {
         if (xCollision && yCollision && this.row === xCollision + SQUARE_SIDE && this.col === yCollision) { 
             // if player goes back to this position, statement gets executed!
             this.subObstacles = this.obstacles.positionBolts.filter(element => {
-                if (element.x === xCollision && element.y < yCollision) {
+                if (element.x === xCollision && element.y < yCollision) { 
+                    //Add if-condition above to filter only obstacles that are continuos in the y-cordinates
                     return true;
                 } else return false;
             })
@@ -170,6 +169,15 @@ class Player {
             xCollision = null;
             yCollision = null;
         }
+
+        // Update used path 
+        for (let obstacle of this.subObstacles) {
+            this.usedPath = this.usedPath.filter(element => {
+               if (element[0] === obstacle.x && element[1] === obstacle.y) return false;
+               else return true;
+            })
+        }
+
     }
 
 
