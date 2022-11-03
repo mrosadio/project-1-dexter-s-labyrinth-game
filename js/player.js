@@ -90,14 +90,13 @@ class Player {
         }
         this.usedPath.push([this.row, this.col]);
         this.moveObstacles();
-
     }
 
     collision() {
         /* Remove chips objects from coordinates array */
         this.points.positionChips = this.points.positionChips.filter(chip => {
             if (dist(this.row, this.col, chip.x, chip.y) < SQUARE_SIDE) {
-                this.score++
+                this.score += 100;
                 document.querySelector("#score span").innerText = this.score;
                 return false;
             } else return true;
@@ -105,7 +104,7 @@ class Player {
         /* Remove bytes objects from coordinates array */
         this.points.positionBytes = this.points.positionBytes.filter(byte => {
             if (dist(this.row, this.col, byte.x, byte.y) < SQUARE_SIDE) {
-                this.score++
+                this.score += 100;
                 document.querySelector("#score span").innerText = this.score;
                 return false;
             } else return true;
@@ -141,29 +140,66 @@ class Player {
 
     moveObstacles() {
         /* Nested loop */
+        let xCollision;
+        let yCollision;
+        console.log(xCollision, yCollision);
+        /* Working version */
         for (let obstacle of this.obstacles.positionBolts) {
             for (let position of this.usedPath) {
                 if (obstacle.x === position[0] && obstacle.y + SQUARE_SIDE === position[1]) {
-                    let xCollision = obstacle.x;
-                    let yCollision = obstacle.y;
-                    this.subObstacles = this.obstacles.positionBolts.filter(element => {
-                        if (element.x === xCollision && element.y <= yCollision) {
-                            return true;
-                        } else return false;
-                    })
+                    xCollision = obstacle.x;
+                    yCollision = obstacle.y + SQUARE_SIDE;
+                    console.log(xCollision, yCollision);
                 }
             }
         }
-        console.log(this.subObstacles);
-        /*console.log(this.obstacles.positionBolts);*/
+        // If collision point exists and player already went thorugh collision point 
+        if (xCollision && yCollision && this.row === xCollision + SQUARE_SIDE) {
+            this.subObstacles = this.obstacles.positionBolts.filter(element => {
+                if (element.x === xCollision && element.y < yCollision) {
+                    return true;
+                } else return false;
+            })
 
-        /* Iterate through each object of subarray and change the y-coordinates */
-        /*for (let element of this.subObstacles) {
-            element.y = element.y + SQUARE_SIDE;
+            for (let element of this.subObstacles) {
+                element.y = element.y + SQUARE_SIDE;
+            }
+            xCollision = null;
+            yCollision = null;
         }
-        console.log(this.subObstacles);*/
+        console.log(this.subObstacles);
+        console.log(this.usedPath);
+
+
+        /* Version 1 Code - DO NOT MODIFY */
+
+        /* If there is a collision coordinate, 
+           save the coordinates of obstacles above collision point */
+        /*if (xCollision && yCollision) { // If there is a collision coordinate, execute loop 
+            for (let obstacle of this.obstacles.positionBolts) {
+                for (let position of this.usedPath) {
+                    if (obstacle.x === position[0] && obstacle.y + SQUARE_SIDE === position[1]) {
+                        xCollision = obstacle.x;
+                        yCollision = obstacle.y + SQUARE_SIDE;
+                        console.log(xCollision, yCollision);
+                        this.subObstacles = this.obstacles.positionBolts.filter(element => {
+                            if (element.x === xCollision && element.y < yCollision) {
+                                return true;
+                            } else return false;
+                        })
+                    }
+                }
+
+                for (let element of this.subObstacles) {
+                    element.y = element.y + SQUARE_SIDE;
+                }
+                xCollision = null;
+                yCollision = null;
+            }
+        }
+        */
     }
 
-    
+
 
 }

@@ -7,6 +7,7 @@ const points      = new Points();
 const obstacles   = new Obstacles();
 const player      = new Player(0, 0, points, obstacles);
 const background  = new Background();
+const exit        = new Exit();
 
 function setup() {
     let canvas = createCanvas(WIDTH, HEIGHT);
@@ -17,6 +18,7 @@ function preload() {
   player.preload();
   points.preload();
   obstacles.preload();
+  exit.preload();
   points.positionChips.forEach((chip) => {
     chip.chip   = loadImage("../img/points/chip.png");
   })
@@ -34,6 +36,7 @@ function draw() {
     player.draw();
     points.draw();
     obstacles.draw();
+    exit.draw()
 }
 
 function keyPressed() {
