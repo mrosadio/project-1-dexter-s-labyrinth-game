@@ -6,8 +6,8 @@
 const points      = new Points();
 const obstacles   = new Obstacles();
 const player      = new Player(0, 0, points, obstacles);
+const exit        = new Exit(player);
 const background  = new Background();
-const exit        = new Exit();
 
 function setup() {
     let canvas = createCanvas(WIDTH, HEIGHT);
@@ -36,7 +36,8 @@ function draw() {
     player.draw();
     points.draw();
     obstacles.draw();
-    exit.draw()
+    exit.draw();
+    exit.collisionExit();
 }
 
 function keyPressed() {

@@ -1,9 +1,10 @@
 class Exit {
 
-    constructor() {
-        //this.player;
+    constructor(player) {
+        this.player = player;
         this.exitImageLocked;
         this.exitImageUnlocked;
+        this.gameOverImage;
         this.x = WIDTH  - (SQUARE_SIDE * 2);
         this.y = HEIGHT - (SQUARE_SIDE * 2);
     }
@@ -11,6 +12,7 @@ class Exit {
     preload() {
         this.exitImageLocked    = loadImage("../img/exit/exit-locked.png");
         this.exitImageUnlocked  = loadImage("../img/exit/exit-unlocked.png");
+        this.gameOverImage      = loadImage("../img/field/map-sprite.png");
     }
 
     draw() {
@@ -20,10 +22,18 @@ class Exit {
         }
     }
 
-    /* Add collision function 
-    1. When exit portal turned green and player collides with exit
-    2. Background should disappear 
-    3. Insert text for Next level
-    */
+    collisionExit() {
+        for (let position of this.player.usedPath) {
+            if (position[0] === this.x && position[1] === this.y) { //If player goes through exit
+                for (let x = SQUARE_SIDE; x < WIDTH; x += SQUARE_SIDE) {
+                    for (let y = SQUARE_SIDE; y < HEIGHT; y+= SQUARE_SIDE) {
+                        image(this.gameOverImage, x, y, SQUARE_SIDE, SQUARE_SIDE);
+                    }
+                }
+            document.getElementById('game-over').classList.remove('hidden');
+            }
+        }
+
+    }
 
 }

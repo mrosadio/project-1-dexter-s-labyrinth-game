@@ -143,7 +143,6 @@ class Player {
         let yCollision;
         for (let obstacle of this.obstacles.positionBolts) {
             for (let position of this.usedPath) {
-                
                 if (obstacle.x === position[0] && obstacle.y + SQUARE_SIDE === position[1]) {
                     xCollision = obstacle.x;
                     yCollision = obstacle.y + SQUARE_SIDE;
@@ -151,26 +150,35 @@ class Player {
                 }
             }
         }
-        // If collision point exists and player already went thorugh collision point 
         if (xCollision && yCollision && this.row === xCollision + SQUARE_SIDE && this.col === yCollision) { 
-            // if player goes back to this position, statement gets executed!
+            
+            // Define y-coordinate where subarray selection should stop   
+            /*let yObstacleStop = yCollision;
+            console.log(this.obstacles.positionBolts);
+            for (let obstacle of this.obstacles.positionBolts) {
+                if (yObstacleStop - SQUARE_SIDE === obstacle.y) {
+                    yObstacleStop = obstacle.y;
+                }
+                else {
+                    yObstacleStop = yCollision - SQUARE_SIDE; 
+                }
+                console.log(yObstacleStop);
+            }
+            console.log(yObstacleStop);
+            */
+            // Select only obstacles in x-coordinate of and that stops in last obstacle of y-coordinate 
             this.subObstacles = this.obstacles.positionBolts.filter(element => {
-                if (element.x === xCollision && element.y < yCollision) { 
-                    //Add if-condition above to filter only obstacles that are continuos in the y-cordinates
+                if (element.x === xCollision && element.y < yCollision /*&& element.y >= yObstacleStop*/) { //Add if-condition above to filter only obstacles that are continuos in the y-cordinates
                     return true;
                 } else return false;
             })
-
             for (let element of this.subObstacles) {
                 element.y = element.y + SQUARE_SIDE;
             }
-            console.log(this.subObstacles);
-            console.log(this.usedPath);
             xCollision = null;
             yCollision = null;
         }
-
-        // Update used path 
+        // Update players path 
         for (let obstacle of this.subObstacles) {
             this.usedPath = this.usedPath.filter(element => {
                if (element[0] === obstacle.x && element[1] === obstacle.y) return false;
@@ -179,7 +187,5 @@ class Player {
         }
 
     }
-
-
 
 }

@@ -11,10 +11,20 @@
 <body>
     <h1> 
         <p class="main">DEXTER's</p> 
-        <p class="subtitle">Labyrinth</p>
+        <p class="subtitle"> <span>Labyrinth</span></p>
     </h1>
-    <h2 id = "score">Score: <span>0</span> </h2>
     
+    <audio loop autoplay>
+        <source src = "./audio/dexter_track_fixed.wav" type="audio/wav">
+    </audio>
+
+    <!-- Game Over text -->
+
+    <div id="game-over" class="hidden">
+        <p>GAME OVER!</p>
+        <p>CLICK FOR THE NEXT LEVEL!</p>
+    </div>
+
     <!---- Load JS files ---->
     <script src="js/constants.js"></script>
     <script src="js/background.js"></script>
@@ -24,5 +34,7 @@
     <script src="js/exit.js"></script>
     <script src="js/game.js"></script>
     <script src="js/main.js"></script>
+
+    <h2 id = "score">Score: <span>0</span> </h2>
 </body>
 </html>
