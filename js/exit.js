@@ -10,9 +10,9 @@ class Exit {
     }
 
     preload() {
-        this.exitImageLocked    = loadImage("../img/exit/exit-locked.png");
-        this.exitImageUnlocked  = loadImage("../img/exit/exit-unlocked.png");
-        this.gameOverImage      = loadImage("../img/field/map-sprite.png");
+        this.exitImageLocked    = loadImage("img/exit/exit-locked.png");
+        this.exitImageUnlocked  = loadImage("img/exit/exit-unlocked.png");
+        this.gameOverImage      = loadImage("img/field/map-sprite.png");
     }
 
     draw() {

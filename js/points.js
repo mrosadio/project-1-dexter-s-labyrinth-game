@@ -51,8 +51,8 @@ class Points {
     }
 
     preload() {
-        this.chip           = loadImage("../img/points/chip.png");
-        this.byte           = loadImage("../img/points/byte-front.png");
+        this.chip           = loadImage("img/points/chip.png");
+        this.byte           = loadImage("img/points/byte-front.png");
     }
 
     draw() {

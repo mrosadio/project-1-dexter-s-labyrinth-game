@@ -8,9 +8,9 @@ class Background {
     }
     
     preload() {
-        this.imageBlock       = loadImage("../img/field/map-block.png");
-        this.imageSprite      = loadImage("../img/field/map-sprite.png");
-        this.imageMicrochip   = loadImage("../img/field/microchip.jpg");
+        this.imageBlock       = loadImage("img/field/map-block.png");
+        this.imageSprite      = loadImage("img/field/map-sprite.png");
+        this.imageMicrochip   = loadImage("img/field/microchip.jpg");
     }
 
     drawMap() {

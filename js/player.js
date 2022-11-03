@@ -16,10 +16,10 @@ class Player {
     }
 
     preload() {
-        this.dexterStart    = loadImage("../img/player/dexter-start-position.png");
-        this.dexterPush     = loadImage("../img/player/dexter-push.png");
-        this.dexterPushStop = loadImage("../img/player/dexter-push-stop.png");
-        this.dexterPath     = loadImage("../img/player/dexter-path.png");
+        this.dexterStart    = loadImage("img/player/dexter-start-position.png");
+        this.dexterPush     = loadImage("img/player/dexter-push.png");
+        this.dexterPushStop = loadImage("img/player/dexter-push-stop.png");
+        this.dexterPath     = loadImage("img/player/dexter-path.png");
         this.image          = this.dexterStart;
     }
 

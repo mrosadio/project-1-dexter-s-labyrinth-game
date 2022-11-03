@@ -20,14 +20,14 @@ function preload() {
   obstacles.preload();
   exit.preload();
   points.positionChips.forEach((chip) => {
-    chip.chip   = loadImage("../img/points/chip.png");
+    chip.chip   = loadImage("img/points/chip.png");
   })
   points.positionBytes.forEach((byte) => {
-    byte.byte   = loadImage("../img/points/byte-front.png");
+    byte.byte   = loadImage("img/points/byte-front.png");
   })
   obstacles.positionBolts.forEach((bolt) => {
-    bolt.bolt   = loadImage("../img/obstacles/bolt.png");
-    bolt.sprite = loadImage("../img/field/map-sprite-rose.png");
+    bolt.bolt   = loadImage("img/obstacles/bolt.png");
+    bolt.sprite = loadImage("img/field/map-sprite-rose.png");
   })
 }
 
